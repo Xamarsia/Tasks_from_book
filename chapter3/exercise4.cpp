@@ -5,29 +5,26 @@
 // дение и частное этих значений.
 
 #include <iostream>
+#include <algorithm>
 
 int main()
 {
     int val1;
     int val2;
-    std::cout << "Enter two integer values and press 'enter': \n ";
+    std::cout << "Enter two integer values and press 'enter':" << std::endl;
     std::cin >> val1 >> val2;
-    if (val1 > val2)
+    if (val1 = val2)
     {
-        std::cout << "Minimum: " << val2 << "\n ";
-        std::cout << "Maximum: " << val1 << "\n ";
-    }
-    else if (val1 < val2)
-    {
-        std::cout << "Minimum: " << val1 << "\n ";
-        std::cout << "Maximum: " << val2 << "\n ";
+        std::cout << val1 << " = " << val2 << std::endl;
     }
     else
     {
-        std::cout << val1 << "=" << val2 << "\n ";
+        std::cout << "Maximum: " << std::max(val1, val2) << std::endl;
+        std::cout << "Minimum: " << std::min(val1, val2) << std::endl;
     }
-    std::cout << "Sum: " << val2 + val1 << "\n ";
-    std::cout << "Division : " << val1 / val2 << "\n ";
-    std::cout << "Average: " << (val2 + val1) / 2 << "\n ";
+
+    std::cout << "Sum: " << val2 + val1 << std::endl;
+    std::cout << "Division: " << val1 / val2 << std::endl;
+    std::cout << "Average: " << (val2 + val1) / 2 << std::endl;
     return 0;
 }
