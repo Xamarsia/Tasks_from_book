@@ -7,6 +7,10 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
+#include <algorithm>
+#include <cctype> 
+#include <clocale>
 
 int transformation(std::string &number_str)
 {
@@ -19,7 +23,18 @@ int transformation(std::string &number_str)
             return 0;
         }
     }
-    throw -1;
+    throw std::invalid_argument("I don't know that number!");
+}
+
+void check(std::string number_str)
+{
+    for (char str : number_str)
+    {
+        if (!std::isalpha(str))
+        {
+            throw std::invalid_argument("Incorrectly entered string!");
+        }
+    }
 }
 
 int main()
@@ -31,13 +46,16 @@ int main()
 
     while (std::cin >> number_str)
     {
+        std::transform(number_str.begin(), number_str.end(), number_str.begin(), tolower);
         try
         {
+            check(number_str);
             transformation(number_str);
         }
-        catch (int)
+
+        catch (std::invalid_argument &exception)
         {
-            std::cerr << "I don't know that number!" << std::endl;
+            std::cerr << exception.what() << std::endl;
         }
     }
     return 0;
