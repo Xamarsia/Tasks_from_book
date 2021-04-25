@@ -5,6 +5,7 @@
 // они совпадать? Чем они различаются?
 
 #include <iostream>
+#include <algorithm>
 
 int main()
 {
