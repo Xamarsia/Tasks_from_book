@@ -32,10 +32,9 @@ void binaryGuessing(int &maxNumber, int &minNumber, int &guessedNumber)
 
 int main()
 {
-
     int maxNumber = 100;
     int minNumber = 0;
-    int guessedNumber = maxNumber / 2;
+    int guessedNumber = 100 / 2;
 
     std::cout << "Think of a number from " << minNumber << " to " << maxNumber << std::endl;
     std::cout << "Did you guess the number " << guessedNumber << "? Enter 'y' if yes and 'n' if no." << std::endl;
@@ -56,6 +55,6 @@ int main()
             std::cout << "Did you guess the number " << guessedNumber << "? Enter 'y' if yes and 'n' if no." << std::endl;
         }
         std::cout << "Congratulations!!! Your number is " << guessedNumber << std::endl;
-
-        return 0;
     }
+    return 0;
+}
