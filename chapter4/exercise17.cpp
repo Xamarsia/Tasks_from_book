@@ -1,5 +1,5 @@
 // 17 . Напишите программу, определяющую наименьшее и наибольшее
-// значения, а также модy последовательности строк типа s tring.
+// значения, а также модy последовательности строк типа string.
 
 #include <iostream>
 #include <vector>
@@ -7,20 +7,12 @@
 #include <limits>
 #include <stdexcept>
 
-int getNumber()
+std::string getString()
 {
-    while (true)
-    {
-        int number;
-        std::cout << "Enter a positive number: " << std::endl;
-        if (std::cin >> number && number >= 0)
-        {
-            return number;
-        }
-        std::cout << "\tIncorrect input. Please, try again." << std::endl;
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-    }
+    std::cout << "Enter a string: " << std::endl;
+    std::string str;
+    std::cin >> str;
+    return str;
 }
 
 bool runAgainMessage()
@@ -42,25 +34,41 @@ bool runAgainMessage()
     }
 }
 
-std::map<int, int> getNumbersMap()
+int getNumber()
 {
-    std::map<int, int> numbersMap;
-    std::cout << "\tHow many numbers do you want to enter? " << std::endl;
-    int numbersCount = getNumber();
-    std::cout << "\tEnter your numbers:" << std::endl;
-    for (int i = 0; i < numbersCount; i++)
+    while (true)
     {
-        numbersMap[getNumber()] += 1;
+        int number;
+        std::cout << "Enter a positive number: " << std::endl;
+        if (std::cin >> number && number >= 0)
+        {
+            return number;
+        }
+        std::cout << "\tIncorrect input. Please, try again." << std::endl;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
-    return numbersMap;
 }
 
-std::vector<int> findMode(const std::map<int, int> &numbersMap)
+std::map<std::string, int> getStringsMap()
 {
-    std::vector<int> mode;
+    std::map<std::string, int> stringsMap;
+    std::cout << "\tHow many strings do you want to enter? " << std::endl;
+    int stringsCount = getNumber();
+    std::cout << "\tEnter your string:" << std::endl;
+    for (int i = 0; i < stringsCount; i++)
+    {
+        stringsMap[getString()] += 1;
+    }
+    return stringsMap;
+}
+
+std::vector<std::string> findMode(const std::map<std::string, int> &stringMap)
+{
+    std::vector<std::string> mode;
 
     int maxCount = 1;
-    for (const auto &it : numbersMap)
+    for (const auto &it : stringMap)
     {
         if (it.second > maxCount)
         {
@@ -68,56 +76,56 @@ std::vector<int> findMode(const std::map<int, int> &numbersMap)
         }
     }
 
-    for (const auto &it : numbersMap)
+    for (const auto &it : stringMap)
     {
         if (it.second == maxCount)
         {
             mode.push_back(it.first);
         }
     }
-
     return mode;
 }
 
-int getMax(const std::map<int, int> &numbersMap)
+
+std::string getMax(const std::map<std::string, int> &stringMap)
 {
-    if(numbersMap.size() == 0)
+    if (stringMap.size() == 0)
     {
         throw std::length_error("Empty map.");
     }
-    int maxNumber = numbersMap.begin()->first;
+    std::string maxString = stringMap.begin()->first;
 
-    for (const auto &it : numbersMap)
+    for (const auto &it : stringMap)
     {
-        if (it.first > maxNumber)
+        if (it.first > maxString)
         {
-            maxNumber = it.first;
+            maxString = it.first;
         }
     }
-    return maxNumber;
+    return maxString;
 }
 
-int getMin(const std::map<int, int> &numbersMap)
+std::string getMin(const std::map<std::string, int> &stringMap)
 {
-    if(numbersMap.size() == 0)
+    if (stringMap.size() == 0)
     {
         throw std::length_error("Empty map.");
     }
-    int minNumber = numbersMap.begin()->first;
-    for (const auto &it : numbersMap)
+    std::string minString = stringMap.begin()->first;
+    for (const auto &it : stringMap)
     {
-        if (it.first < minNumber)
+        if (it.first < minString)
         {
-            minNumber = it.first;
+            minString = it.first;
         }
     }
-    return minNumber;
+    return minString;
 }
 
-void printMode(const std::vector<int> &maxCount)
+void printMode(const std::vector<std::string> &maxCount)
 {
-    std::cout << "\tMode of a set of positive numbers : ";
-    for (int i : maxCount)
+    std::cout << "\tMode of a set of strings: ";
+    for (auto i : maxCount)
     {
         std::cout << i << " ";
     }
@@ -128,16 +136,16 @@ void run()
 {
     while (true)
     {
-        std::map<int, int> numbersMap = getNumbersMap();
-        if(numbersMap.size() == 0)
+        std::map<std::string, int> stringsMap = getStringsMap();
+        if (stringsMap.size() == 0)
         {
             std::cout << "The sequence of lines is empty." << std::endl;
             return;
         }
-        std::vector<int> mode = findMode(numbersMap);
+        std::vector<std::string> mode = findMode(stringsMap);
         printMode(mode);
-        std::cout << "Your smallest value: " << getMin(numbersMap) << std::endl;
-        std::cout << "Your greatest value: " << getMax(numbersMap) << std::endl;
+        std::cout << "Your smallest value: " << getMin(stringsMap) << std::endl;
+        std::cout << "Your greatest value: " << getMax(stringsMap) << std::endl;
         if (!runAgainMessage())
         {
             return;
